@@ -1,8 +1,10 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useUser } from '../../context/UserContext';
 
 const Login: React.FC = () => {
-
+    const { BASEURL, setUser } = useUser()
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -16,9 +18,22 @@ const Login: React.FC = () => {
         }))
     }
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault()
-        console.log(formData)
+        try {
+            const resp = await axios.post(`${BASEURL}/auth/login`, formData)
+            if (resp.data.success) {
+                alert("Login Successfull")
+                const { token, userId } = resp.data
+                window.localStorage.setItem('token', token);
+                window.localStorage.setItem('userId', userId);
+                setUser(resp.data)
+            } else {
+                alert("Internal Server error")
+            }
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return (

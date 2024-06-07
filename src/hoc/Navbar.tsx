@@ -4,24 +4,25 @@ import { Link } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { user } = useUser()
+    const { user, token } = useUser()
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    console.log(user)
+    console.log("adff", user)
 
     return (
-        <nav className="bg-white border-gray-200 dark:bg-gray-900 shadow-md">
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-8 py-4">
+        <nav className="bg-white dark:bg-gray-900 shadow-md">
+            <div className="flex flex-wrap items-center justify-between mx-auto px-8 py-4">
                 <Link to='/' className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
                     <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
                 </Link>
-                {user ? (
-                    <button type="button" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" onClick={toggleMenu} aria-expanded={isMenuOpen} aria-controls="user-dropdown">
-                        <span className="sr-only">Open user menu</span>
-                        <img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo" />
+                {token ? (
+                    <button type="button" className="flex px-4 py-2 text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" onClick={toggleMenu} aria-expanded={isMenuOpen} aria-controls="user-dropdown">
+                        {/* <span className="sr-only">Open user menu</span>
+                        <img className="w-8 h-8 rounded-full" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="user photo" /> */}
+                        <span className="block text-sm text-gray-900 dark:text-white">{user?.fullname}</span>
                     </button>
                 ) : (
                     <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
@@ -42,23 +43,17 @@ const Navbar: React.FC = () => {
                 )}
             </div>
             {isMenuOpen && (
-                <div className="absolute right-2 flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                <div className="absolute right-7 flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     {/* Dropdown menu */}
                     <div className={`z-50  my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`} id="user-dropdown">
                         <div className="px-4 py-3">
-                            <span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-                            <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+                            <span className="block text-sm text-gray-900 dark:text-white">{user?.fullname}</span>
+                            <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">{user?.email}</span>
                         </div>
                         <ul className="py-2">
-                            <li>
-                                <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-                            </li>
-                            <li>
-                                <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
-                            </li>
+                            <Link to='/setting' className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                Settings
+                            </Link>
                             <li>
                                 <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
                             </li>
