@@ -7,6 +7,7 @@ const Homepage: React.FC = () => {
                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Home page
                 </h1>
+                <p className='mt-6 text-white text-sm'>This is homepage</p>
             </div>
         </section>
     )
