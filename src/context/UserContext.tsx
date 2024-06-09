@@ -28,9 +28,8 @@ interface UserContextProviderProps {
 export const UserContextProvider: React.FC<UserContextProviderProps> = ({ children }) => {
     const [user, setUser] = useState<any>(null); // Change 'any' to the actual type of user
     const BASEURL = "http://localhost:8000"
-    const token = window.localStorage.getItem('token')
-    const userId = window.localStorage.getItem('userId')
-
+    var token = window.localStorage.getItem('token')
+    var userId = window.localStorage.getItem('userId')
     const getSingleUser = async () => {
         try {
             const resp = await axios.get(`${BASEURL}/api/v1/getSingleUser/${userId}`)
@@ -45,8 +44,10 @@ export const UserContextProvider: React.FC<UserContextProviderProps> = ({ childr
     }
 
     useEffect(() => {
+        token = window.localStorage.getItem('token')
+        userId = window.localStorage.getItem('userId')
         getSingleUser()
-    }, [user, token, userId])
+    }, [token, userId])
 
     return (
         <UserContext.Provider value={{ user, setUser, BASEURL, token, userId }}>
