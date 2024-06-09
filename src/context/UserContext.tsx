@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState, useContext, createContext, ReactNode, useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 // Define the type for the user context
 interface UserContextType {
@@ -36,7 +37,7 @@ export const UserContextProvider: React.FC<UserContextProviderProps> = ({ childr
             if (resp.data.success) {
                 setUser(resp.data.data)
             } else {
-                alert("Internal Server error")
+                toast.error("Internal Server error")
             }
         } catch (err) {
             console.log(err)
@@ -45,7 +46,7 @@ export const UserContextProvider: React.FC<UserContextProviderProps> = ({ childr
 
     useEffect(() => {
         getSingleUser()
-    }, [])
+    }, [user, token, userId])
 
     return (
         <UserContext.Provider value={{ user, setUser, BASEURL, token, userId }}>

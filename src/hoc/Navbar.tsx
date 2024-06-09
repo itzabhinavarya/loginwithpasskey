@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useUser } from '../context/UserContext';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const Navbar: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,14 +10,18 @@ const Navbar: React.FC = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    console.log("adff", user)
+    const handleSignout = () => {
+        setIsMenuOpen(false)
+        localStorage.clear()
+        toast.success("Sign Out Successfull")
+    }
 
     return (
         <nav className="bg-white dark:bg-gray-900 shadow-md">
             <div className="flex flex-wrap items-center justify-between mx-auto px-8 py-4">
                 <Link to='/' className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">PassWithKey</span>
                 </Link>
                 {token ? (
                     <button type="button" className="flex px-4 py-2 text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" onClick={toggleMenu} aria-expanded={isMenuOpen} aria-controls="user-dropdown">
@@ -55,7 +60,7 @@ const Navbar: React.FC = () => {
                                 Settings
                             </Link>
                             <li>
-                                <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                                <a href="#" onClick={handleSignout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
                             </li>
                         </ul>
                     </div>

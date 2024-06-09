@@ -2,6 +2,7 @@ import React from 'react'
 import { useUser } from '../../context/UserContext'
 import axios from 'axios'
 import { startRegistration } from '@simplewebauthn/browser';
+import toast from 'react-hot-toast';
 
 const Settings = () => {
     const { userId, BASEURL } = useUser()
@@ -17,7 +18,7 @@ const Settings = () => {
             }
             const isVerified = await axios.post(`${BASEURL}/auth/register-verify`, bodyData)
             if (isVerified.data.success === true) {
-                alert(isVerified.data.message)
+                toast.success(isVerified.data.message)
             }
         }
     }
