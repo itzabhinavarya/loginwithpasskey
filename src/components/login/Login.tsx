@@ -68,7 +68,6 @@ const Login: React.FC = () => {
                     window.localStorage.setItem('token', token);
                     window.localStorage.setItem('userId', userId);
                     setUser(isVerified.data);
-                    alert(isVerified.data.message);
                     toast.success(isVerified.data.message);
                 } else {
                     toast.error(isVerified.data.message);
