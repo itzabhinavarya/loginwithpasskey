@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useUser } from '../context/UserContext';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
-
+import Logo from '../assets/logo1.png';
 const Navbar: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { user, token } = useUser()
@@ -16,18 +16,24 @@ const Navbar: React.FC = () => {
         toast.success("Sign Out Successfull")
     }
 
+    function getInitials(name: String) {
+        const words = name.split(' ');
+
+        const initials = words.map(word => word.charAt(0).toUpperCase());
+
+        return initials.join('');
+    }
+
     return (
         <nav className="bg-white dark:bg-gray-900 shadow-md">
-            <div className="flex flex-wrap items-center justify-between mx-auto px-8 py-4">
-                <Link to='/' className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">PassWithKey</span>
+            <div className="flex flex-wrap items-center justify-between mx-auto px-8 py-4 border border-t-0 border-l-0 border-r-0 border-b border-gray-500 shadow-md shadow-white">
+                <Link to='/' className="flex relative items-center space-x-3 rtl:space-x-reverse">
+                    <img src={Logo} className="h-24 absolute" alt="Flowbite Logo" />
+                    <span className="self-center relative left-16 text-2xl font-semibold whitespace-nowrap dark:text-white">PassWithKey</span>
                 </Link>
                 {token ? (
-                    <button type="button" className="flex px-4 py-2 text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" onClick={toggleMenu} aria-expanded={isMenuOpen} aria-controls="user-dropdown">
-                        {/* <span className="sr-only">Open user menu</span>
-                        <img className="w-8 h-8 rounded-full" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="user photo" /> */}
-                        <span className="block text-sm text-gray-900 dark:text-white">{user?.fullname}</span>
+                    <button type="button" className="flex relative right-6 items-center p-1 text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" onClick={toggleMenu} aria-expanded={isMenuOpen} aria-controls="user-dropdown">
+                        <div className="w-10 h-10 text-sm font-semibold rounded-full bg-gray-400 flex justify-center items-center">{getInitials(user?.fullname)}</div>
                     </button>
                 ) : (
                     <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
@@ -48,7 +54,7 @@ const Navbar: React.FC = () => {
                 )}
             </div>
             {isMenuOpen && (
-                <div className="absolute right-7 flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                <div className="absolute top-16 right-14 flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     {/* Dropdown menu */}
                     <div className={`z-50  my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`} id="user-dropdown">
                         <div className="px-4 py-3">
@@ -59,8 +65,8 @@ const Navbar: React.FC = () => {
                             <Link to='/setting' onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                 Settings
                             </Link>
-                            <li>
-                                <a href="#" onClick={handleSignout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                            <li className='px-3 mt-2'>
+                                <a href="#" onClick={handleSignout} className="font-semibold rounded-md block bg-red-600 px-4 py-2 text-sm text-gray-700 hover:bg-red-700 dark:hover:bg-red-700 dark:text-gray-200 dark:hover:text-white">Sign out</a>
                             </li>
                         </ul>
                     </div>
