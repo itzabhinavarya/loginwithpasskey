@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
                 </Link>
                 {token ? (
                     <button type="button" className="flex relative right-6 items-center p-1 text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" onClick={toggleMenu} aria-expanded={isMenuOpen} aria-controls="user-dropdown">
-                        <div className="w-10 h-10 text-sm font-semibold rounded-full bg-gray-400 flex justify-center items-center">{getInitials(user?.fullname)}</div>
+                        <div className="w-10 h-10 text-sm font-semibold rounded-full bg-gray-400 flex justify-center items-center">{getInitials(user?.fullname ?? "NA")}</div>
                     </button>
                 ) : (
                     <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">

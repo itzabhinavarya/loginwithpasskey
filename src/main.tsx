@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <UserContextProvider>
         <App />
         <Toaster
-          position="top-right"
+          position="bottom-right"
           reverseOrder={false}
           gutter={8}
           containerClassName=""
