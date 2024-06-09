@@ -12,7 +12,7 @@ const Homepage: React.FC = () => {
                         Login using <span className='text-blue-700'>PassKey</span>
                     </h1>
                     <p className="mt-4 text-gray-700 dark:text-gray-300 text-lg">
-                        You can use your Fingerprint/Biometrics, Windows Hello, Apple Face/Touch ID to login.
+                        You can use your Fingerprint/Biometrics, Android Devices, Windows Hello, Apple/Mac/iPad Touch ID to login.
                     </p>
                     <Link to='/setting'>
                         <div className='mt-4'>
