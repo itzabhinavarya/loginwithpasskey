@@ -33,6 +33,12 @@ const Signup: React.FC = () => {
             }
         } catch (err) {
             console.log(err)
+        } finally {
+            setFormData({
+                fullname: "",
+                email: "",
+                password: ""
+            })
         }
     }
 

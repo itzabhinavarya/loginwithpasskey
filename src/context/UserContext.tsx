@@ -27,7 +27,7 @@ interface UserContextProviderProps {
 
 export const UserContextProvider: React.FC<UserContextProviderProps> = ({ children }) => {
     const [user, setUser] = useState<any>(null); // Change 'any' to the actual type of user
-    const BASEURL = "http://localhost:8000"
+    const BASEURL = import.meta.env.VITE_REACT_APP_BASE_URL;
     var token = window.localStorage.getItem('token')
     var userId = window.localStorage.getItem('userId')
     const getSingleUser = async () => {
