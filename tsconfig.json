@@ -5,6 +5,7 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    // "types": ["node", "react", "react-dom", "prop-types"], // Add 'prop-types' here
 
     /* Bundler mode */
     "moduleResolution": "bundler",
