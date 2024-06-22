@@ -8,6 +8,7 @@ interface UserContextType {
     BASEURL: string,
     token: any,
     userId: any,
+    loading: boolean,
     setUser: React.Dispatch<React.SetStateAction<any>>; // Change 'any' to the actual type of user
 }
 
@@ -27,9 +28,11 @@ interface UserContextProviderProps {
 
 export const UserContextProvider: React.FC<UserContextProviderProps> = ({ children }) => {
     const [user, setUser] = useState<any>(null); // Change 'any' to the actual type of user
+    const [loading, setLoading] = useState(true)
     const BASEURL = import.meta.env.VITE_REACT_APP_BASE_URL;
     var token = window.localStorage.getItem('token')
     var userId = window.localStorage.getItem('userId')
+
     const getSingleUser = async () => {
         try {
             const resp = await axios.get(`${BASEURL}/api/v1/getSingleUser/${userId}`)
@@ -40,6 +43,8 @@ export const UserContextProvider: React.FC<UserContextProviderProps> = ({ childr
             }
         } catch (err) {
             console.log(err)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -50,7 +55,7 @@ export const UserContextProvider: React.FC<UserContextProviderProps> = ({ childr
     }, [token, userId])
 
     return (
-        <UserContext.Provider value={{ user, setUser, BASEURL, token, userId }}>
+        <UserContext.Provider value={{ user, setUser, BASEURL, token, userId, loading }}>
             {children}
         </UserContext.Provider>
     );
