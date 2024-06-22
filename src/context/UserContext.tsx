@@ -9,6 +9,7 @@ interface UserContextType {
     token: any,
     userId: any,
     loading: boolean,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
     setUser: React.Dispatch<React.SetStateAction<any>>; // Change 'any' to the actual type of user
 }
 
@@ -55,7 +56,7 @@ export const UserContextProvider: React.FC<UserContextProviderProps> = ({ childr
     }, [token, userId])
 
     return (
-        <UserContext.Provider value={{ user, setUser, BASEURL, token, userId, loading }}>
+        <UserContext.Provider value={{ user, setUser, BASEURL, token, userId, loading, setLoading }}>
             {children}
         </UserContext.Provider>
     );
