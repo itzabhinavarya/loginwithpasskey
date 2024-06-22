@@ -6,7 +6,7 @@ const imageURL = 'https://www.engineersgarage.com/wp-content/uploads/2021/10/TCH
 const Homepage: React.FC = () => {
     return (
         <section className="bg-gray-50 dark:bg-gray-900 min-h-screen flex w-full">
-            <div className="px-14 py-8 flex justify-between w-full ">
+            <div className="px-14 py-8 md:flex justify-between w-full ">
                 <div className="md:w-1/2 flex flex-col items-start w-full">
                     <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900 md:text-4xl dark:text-white">
                         Login using <span className='text-blue-700'>PassKey</span>
@@ -20,8 +20,8 @@ const Homepage: React.FC = () => {
                         </div>
                     </Link>
                 </div>
-                <div className="md:w-1/2 mt-6 md:mt-0 flex justify-end ">
-                    <img src={imageURL} alt="Sample Image" className="rounded-lg shadow-lg object-cover w-4/5 h-4/5" />
+                <div className="w-full md:w-1/2 mt-6 md:mt-0 flex md:justify-end ">
+                    <img src={imageURL} alt="Sample Image" className="rounded-lg shadow-lg object-cover md:w-4/5 md:h-4/5" />
                 </div>
             </div>
         </section>
